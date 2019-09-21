@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>First Desktop Application</title>
+  </head>
+  <body>
+    <h1>Get file length App</h1>
+    <div>
+      <form>
+        <input type="file" accept="video/*" />
+        <button type="submit">Get info</button>
+      </form>
+      <h1 id="duration"></h1>
+      <script>
+        const electron = require('electron');
+        const { ipcRenderer } = electron;
+        const form = document.querySelector('form')
+        if(form !== null){
+          form.addEventListener('submit', event=> {
+          event.preventDefault();
+          const { path } = document.querySelector('input').files[0];
+          ipcRenderer.send('video:submit', path);
+        });
+        }
+        else{
+          consle.log(`The form is null`);
+        }
+
+        ipcRenderer.on('video:metadata', (event, duration) => {
+          document.querySelector('#duration').innerHTML = `The video is ${duration} seconds`;
+        });
+      </script>
+    </div>
+  </body>
+</html>
