@@ -9,7 +9,7 @@
   "author": "Simon Angatia",
   "license": "ISC",
   "dependencies": {
-    "electron": "^6.0.10",
+    "electron": "^9.4.0",
     "fluent-ffmpeg": "^2.1.2"
   }
 }
